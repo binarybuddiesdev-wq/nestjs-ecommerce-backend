@@ -6,6 +6,7 @@ export const setupSwagger = (app: NestFastifyApplication) => {
         .setTitle('APP API')
         .setDescription('API documentation for NESTJS service')
         .setVersion('1.0.0')
+        .addBearerAuth()
         .build();
 
     const document = SwaggerModule.createDocument(app, config);

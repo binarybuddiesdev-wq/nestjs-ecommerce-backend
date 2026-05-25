@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { of } from 'rxjs';
 import type { ExecutionContext, CallHandler } from '@nestjs/common';
 
-import { TransformInterceptor } from './transform.interceptor.js';
+import { TransformInterceptor, IResponse } from './transform.interceptor.js';
 
 describe('TransformInterceptor', () => {
   let interceptor: TransformInterceptor<unknown>;
@@ -11,6 +11,7 @@ describe('TransformInterceptor', () => {
 
   beforeEach(() => {
     interceptor = new TransformInterceptor();
+    // Assert empty object as ExecutionContext to test the interceptor in isolation
     mockExecutionContext = {} as ExecutionContext;
     mockCallHandler = {
       handle: vi.fn(),
@@ -21,7 +22,7 @@ describe('TransformInterceptor', () => {
     const responseData = { id: 1, name: 'test' };
     mockCallHandler.handle = vi.fn().mockReturnValue(of(responseData));
 
-    const result = await new Promise<any>((resolve) => {
+    const result = await new Promise<IResponse<unknown>>((resolve) => {
       interceptor.intercept(mockExecutionContext, mockCallHandler).subscribe(resolve);
     });
 
@@ -36,7 +37,7 @@ describe('TransformInterceptor', () => {
     const responseData = { message: 'Custom message', data: { id: 1 } };
     mockCallHandler.handle = vi.fn().mockReturnValue(of(responseData));
 
-    const result = await new Promise<any>((resolve) => {
+    const result = await new Promise<IResponse<unknown>>((resolve) => {
       interceptor.intercept(mockExecutionContext, mockCallHandler).subscribe(resolve);
     });
 
@@ -51,7 +52,7 @@ describe('TransformInterceptor', () => {
     const responseData = { data: { id: 1 } };
     mockCallHandler.handle = vi.fn().mockReturnValue(of(responseData));
 
-    const result = await new Promise<any>((resolve) => {
+    const result = await new Promise<IResponse<unknown>>((resolve) => {
       interceptor.intercept(mockExecutionContext, mockCallHandler).subscribe(resolve);
     });
 
@@ -63,7 +64,7 @@ describe('TransformInterceptor', () => {
     const responseData = { message: 'OK', data: innerData };
     mockCallHandler.handle = vi.fn().mockReturnValue(of(responseData));
 
-    const result = await new Promise<any>((resolve) => {
+    const result = await new Promise<IResponse<unknown>>((resolve) => {
       interceptor.intercept(mockExecutionContext, mockCallHandler).subscribe(resolve);
     });
 
@@ -74,7 +75,7 @@ describe('TransformInterceptor', () => {
     const rawData = { id: 1, name: 'test' };
     mockCallHandler.handle = vi.fn().mockReturnValue(of(rawData));
 
-    const result = await new Promise<any>((resolve) => {
+    const result = await new Promise<IResponse<unknown>>((resolve) => {
       interceptor.intercept(mockExecutionContext, mockCallHandler).subscribe(resolve);
     });
 

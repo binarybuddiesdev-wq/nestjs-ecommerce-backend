@@ -88,7 +88,7 @@ Health endpoint returns:
 |-------|-------------|--------|
 | 1 | Project Scaffold & Package Installation | 🟢 |
 | 2 | Base Setup & Health API | 🟢 |
-| 3 | Auth | 🔴 |
+| 3 | Auth | 🟢 |
 | 4 | Users & Seller Onboarding | 🔴 |
 | 5 | Categories | 🔴 |
 | 6 | Products | 🔴 |

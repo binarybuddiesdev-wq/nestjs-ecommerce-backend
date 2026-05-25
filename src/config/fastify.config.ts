@@ -24,6 +24,14 @@ export const registerFastifyPlugins = async (app: NestFastifyApplication) => {
             : '*'
     });
 
-    await app.register(fastifyRateLimit, { max: 100, timeWindow: '1 minute' });
+    await app.register(fastifyRateLimit, {
+        max: (req) => {
+            if (req.url.startsWith('/api/v1/auth/')) {
+                return 10;
+            }
+            return 100;
+        },
+        timeWindow: '1 minute',
+    });
 
 };

@@ -7,10 +7,28 @@
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
-  moduleFormat = "commonjs"
+  moduleFormat = "esm"
 }
 
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  email String @unique
+  password String
+  role String @default("CUSTOMER")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RefreshToken {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  token String @unique
+  userId String @db.ObjectId
+  expiresAt DateTime
+  isRevoked Boolean @default(false)
+  createdAt DateTime @default(now())
 }

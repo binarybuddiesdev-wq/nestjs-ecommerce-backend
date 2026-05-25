@@ -14,7 +14,11 @@ export enum ApiTags {
 
 export enum ApiRoutes {
     HEALTH = 'health',
-    AUTH = 'auth',
+    REGISTER = 'register',
+    LOGIN = 'login',
+    REFRESH = 'refresh',
+    LOGOUT = 'logout',
+    ME = 'me',
     USERS = 'users',
     CATEGORIES = 'categories',
     PRODUCTS = 'products',
@@ -44,4 +48,4 @@ export const successResponseSchema = (dataSchema: Record<string, unknown>, messa
             data: dataSchema,
         },
     },
-})
+});

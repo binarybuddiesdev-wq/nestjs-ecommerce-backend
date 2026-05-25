@@ -3,16 +3,17 @@ import { ConfigModule } from '@nestjs/config';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 
 import appConfig from './config/app.config.js';
-import { loggerConfig, } from './config/index.js';
+import { loggerConfig, validateEnv } from './config/index.js';
 import { SanitizeMiddleware } from './common/index.js';
 import { PrismaModule } from './prisma/prisma.module.js';
 import { HealthModule } from './modules/health/health.module.js';
+import { AuthModule } from './modules/auth/auth.module.js';
 
 @Module({
     imports: [
-        ConfigModule.forRoot({ isGlobal: true, load: [appConfig] }),
+        ConfigModule.forRoot({ isGlobal: true, load: [appConfig], validate: validateEnv }),
         LoggerModule.forRoot(loggerConfig),
-        PrismaModule, HealthModule
+        PrismaModule, HealthModule, AuthModule
     ],
     controllers: [],
     providers: [],

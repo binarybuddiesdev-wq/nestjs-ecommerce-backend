@@ -23,8 +23,6 @@ export class GlobalExceptionFilter implements ExceptionFilter {
             ? exception.getStatus()
             : HttpStatus.INTERNAL_SERVER_ERROR;
 
-        if (status >= 500) console.error('REAL ERROR:', exception);
-
         const exceptionResponse = exception instanceof HttpException
             ? exception.getResponse()
             : 'Internal server error';
@@ -60,6 +58,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
         if (typeof exceptionResponse === 'object' && exceptionResponse !== null && 'message' in exceptionResponse) {
 
+            // Assert shape as object containing message to safely extract validation error messages
             const message = (exceptionResponse as { message: unknown }).message;
 
             if (Array.isArray(message)) {

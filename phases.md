@@ -187,7 +187,7 @@ phase will follow.
 
 ---
 
-## Phase 3 — Auth 🔴
+## Phase 3 — Auth 🟢
 
 ### Goal
 JWT access + refresh token rotation. RBAC with Customer, Seller, Admin roles.
@@ -638,7 +638,7 @@ Clean codebase ready for resume and interviews.
 |-------|-------------|--------|
 | 1 | Project Scaffold & Package Installation | 🟢 |
 | 2 | Base Setup & Health API | 🟢 |
-| 3 | Auth | 🔴 |
+| 3 | Auth | 🟢 |
 | 4 | Users & Seller Onboarding | 🔴 |
 | 5 | Categories | 🔴 |
 | 6 | Products | 🔴 |
