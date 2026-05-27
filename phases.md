@@ -275,7 +275,7 @@ Admins can manage all users.
 
 ---
 
-## Phase 5 — Categories 🔴
+## Phase 5 — Categories 🟢
 
 ### Goal
 Hierarchical category tree. Admin only for mutations. Public for reads.
@@ -300,12 +300,12 @@ Hierarchical category tree. Admin only for mutations. Public for reads.
 - Only admin can create/update/delete
 
 ### Verification
-- [ ] pnpm exec tsc --noEmit
-- [ ] pnpm run build
-- [ ] pnpm run test
-- [ ] pnpm run test:coverage
-- [ ] pnpm run test:e2e
-- [ ] Category tree visible in Swagger response
+- [x] pnpm exec tsc --noEmit
+- [x] pnpm run build
+- [x] pnpm run test
+- [x] pnpm run test:coverage
+- [x] pnpm run test:e2e
+- [x] Category tree visible in Swagger response
 
 ---
 
@@ -640,7 +640,7 @@ Clean codebase ready for resume and interviews.
 | 2 | Base Setup & Health API | 🟢 |
 | 3 | Auth | 🟢 |
 | 4 | Users & Seller Onboarding | 🟢 |
-| 5 | Categories | 🔴 |
+| 5 | Categories | 🟢 |
 | 6 | Products | 🔴 |
 | 7 | Cart | 🔴 |
 | 8 | Orders & State Machine | 🔴 |

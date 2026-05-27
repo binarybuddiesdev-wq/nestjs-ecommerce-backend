@@ -27,6 +27,9 @@ export enum ApiRoutes {
     ADMIN_USER_BY_ID = ':id',
     ADMIN_USER_ROLE = ':id/role',
     UPLOAD_AVATAR = 'me/avatar',
+    CATEGORIES = 'categories',
+    ADMIN_CATEGORIES = 'admin/categories',
+    CATEGORY_BY_SLUG = ':slug',
 }
 
 export enum ApiOperation {
@@ -48,6 +51,11 @@ export enum ApiOperation {
     ADMIN_LIST_USERS = 'List All Users (Admin)',
     ADMIN_UPDATE_USER_ROLE = 'Update User Role (Admin)',
     ADMIN_DELETE_USER = 'Delete User (Admin)',
+    CATEGORY_CREATE = 'Create a new category',
+    CATEGORY_GET_TREE = 'Get full category tree',
+    CATEGORY_GET_BY_SLUG = 'Get category by slug',
+    CATEGORY_UPDATE = 'Update a category',
+    CATEGORY_DELETE = 'Delete a category',
 }
 
 export const HEALTH_SUCCESS_MESSAGE = 'Health check passed';
@@ -72,6 +80,11 @@ export const LIST_ALL_USERS_SUCCESS = 'All Users retrieved successfully';
 export const UPDATE_USER_ROLE_SUCCESS = 'User role updated successfully';
 export const DELETE_ADMIN_USER_SUCCESS = 'User deleted successfully';
 export const AVATAR_UPLOAD_SUCCESS = 'Avatar uploaded successfully';
+export const CATEGORY_CREATED_SUCCESS = 'Category created successfully';
+export const CATEGORY_TREE_SUCCESS = 'Category tree retrieved successfully';
+export const CATEGORY_FETCHED_SUCCESS = 'Category retrieved successfully';
+export const CATEGORY_UPDATED_SUCCESS = 'Category updated successfully';
+export const CATEGORY_DELETED_SUCCESS = 'Category deleted successfully';
 
 // Error Messages
 export const EMAIL_IN_USE = 'Email already in use';
@@ -85,6 +98,10 @@ export const USER_ALREADY_INACTIVE = 'User is already inactive';
 export const NO_FILE_UPLOADED = 'No file uploaded';
 export const ACCESS_DENIED = 'Access denied';
 export const INSUFFICIENT_PERMISSIONS = 'Insufficient permissions';
+export const CATEGORY_NOT_FOUND = 'Category not found';
+export const CATEGORY_SLUG_EXISTS = 'Category slug already exists';
+export const PARENT_CATEGORY_NOT_FOUND = 'Parent category not found';
+export const CATEGORY_HAS_PRODUCTS = 'Cannot delete category with active products';
 
 export const successResponseSchema = (dataSchema: Record<string, unknown>, message: string) => ({
     schema: {

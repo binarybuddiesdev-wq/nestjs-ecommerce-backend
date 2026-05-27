@@ -10,12 +10,13 @@ import { HealthModule } from './modules/health/health.module.js';
 import { AuthModule } from './modules/auth/auth.module.js';
 import { CloudinaryModule } from './modules/cloudinary/cloudinary.module.js';
 import { UsersModule } from './modules/users/users.module.js';
+import { CategoriesModule } from './modules/categories/categories.module.js';
 
 @Module({
     imports: [
         ConfigModule.forRoot({ isGlobal: true, load: [appConfig], validate: validateEnv }),
         LoggerModule.forRoot(loggerConfig),
-        PrismaModule, HealthModule, AuthModule, CloudinaryModule, UsersModule
+        PrismaModule, HealthModule, AuthModule, CloudinaryModule, UsersModule, CategoriesModule
     ],
     controllers: [],
     providers: [],

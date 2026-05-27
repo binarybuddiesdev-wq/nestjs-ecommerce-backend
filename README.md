@@ -71,6 +71,13 @@ Available in development only:
       modules/       — feature modules: auth, users, products, cart, orders, payments etc.
       types/         — all TypeScript interfaces and types
 
+## Concepts
+
+Key concepts and patterns used in this project are documented in
+[docs/concepts/](docs/concepts/). Each concept gets its own markdown file
+with real-world examples and in-depth explanations — useful when you're
+learning a pattern for the first time.
+
 ## API Response Shape
 
 All business endpoints return:
@@ -90,7 +97,7 @@ Health endpoint returns:
 | 2 | Base Setup & Health API | 🟢 |
 | 3 | Auth | 🟢 |
 | 4 | Users & Seller Onboarding | 🟢 |
-| 5 | Categories | 🔴 |
+| 5 | Categories | 🟢 |
 | 6 | Products | 🔴 |
 | 7 | Cart | 🔴 |
 | 8 | Orders & State Machine | 🔴 |

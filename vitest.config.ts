@@ -28,7 +28,7 @@ export default defineConfig({
         'src/modules/auth/strategies/index.ts',
         'src/modules/auth/strategies/types.ts',
         'src/modules/cart/**/*',
-        'src/modules/categories/**/*',
+
         'src/modules/coupons/**/*',
         'src/modules/notifications/**/*',
         'src/modules/orders/**/*',

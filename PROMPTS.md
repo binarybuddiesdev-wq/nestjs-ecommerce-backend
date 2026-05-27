@@ -100,9 +100,28 @@ Successfully implemented unit test suites and corrected E2E tests for Phase 4. A
 
 ---
 
-## Phase 5 — Categories 🔴
+## Phase 5 — Categories 🟢
 
-Prompts will be recorded here when phase starts.
+Phase 5 was built manually by the developer.
+API endpoints verified in Postman and Swagger before test suite was written.
+
+Test suite written by Antigravity AI covering:
+- Unit tests for `CategoriesService` — all CRUD methods, happy paths, error branches,
+  and slug/parent validation logic
+- Unit tests for `CategoriesController` (admin) and `PublicCategoriesController`
+- E2E tests for public category endpoints and admin access-control (401 / 403)
+
+### What was covered in the test suite
+- `createCategory` — success, slug auto-generation, duplicate slug → 409, missing parent → 404
+- `findCategoryTree` — hierarchical structure, empty result, multiple roots
+- `findCategoryBySlug` — success, not found → 404, empty slug → 400
+- `updateCategory` — success, not found → 404, slug conflict with other record → 409, self-slug allowed
+- `deleteCategory` — success, not found → 404, children unlinked before soft-delete
+- Controller delegation tests for both controllers
+- E2E: public GET tree and GET by slug (live DB)
+- E2E: 404 on unknown slug
+- E2E: 401 with no auth on admin endpoints
+- E2E: 403 with customer token on admin endpoints
 
 ---
 

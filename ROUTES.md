@@ -115,3 +115,39 @@
 - Role: Admin
 - Description: Soft deletes / deactivates a user's account and revokes their active refresh tokens
 - Response: `{ success: true, message: 'User deleted successfully', data: { id, email, role, name, avatar, address, isActive, createdAt, updatedAt } }`
+
+## Categories (Phase 5)
+
+### GET /api/v1/categories
+- Auth: No
+- Role: Public
+- Description: Returns full hierarchical category tree
+- Response: `{ success: true, message: 'Category tree retrieved successfully', data: [ { id, name, slug, parentId, isActive, createdAt, updatedAt, children: [...] } ] }`
+
+### GET /api/v1/categories/:slug
+- Auth: No
+- Role: Public
+- Description: Returns a single category by slug
+- Response: `{ success: true, message: 'Category retrieved successfully', data: { id, name, slug, parentId, isActive, createdAt, updatedAt } }`
+
+## Admin — Categories (Phase 5)
+
+### POST /api/v1/admin/categories
+- Auth: Yes
+- Role: ADMIN
+- Description: Creates a new top-level or sub-category. Slug is auto-generated from name.
+- Request: `{ name: string, parentId?: string }`
+- Response: `{ success: true, message: 'Category created successfully', data: { id, name, slug, parentId, isActive, createdAt, updatedAt } }`
+
+### PATCH /api/v1/admin/categories/:id
+- Auth: Yes
+- Role: ADMIN
+- Description: Updates a category's name, slug, or isActive flag
+- Request: `{ name?: string, slug?: string, isActive?: boolean }`
+- Response: `{ success: true, message: 'Category updated successfully', data: { id, name, slug, parentId, isActive, createdAt, updatedAt } }`
+
+### DELETE /api/v1/admin/categories/:id
+- Auth: Yes
+- Role: ADMIN
+- Description: Soft-deletes a category (sets isActive to false). Children are unlinked (parentId set to null).
+- Response: `{ success: true, message: 'Category deleted successfully', data: { id, name, slug, parentId, isActive, createdAt, updatedAt } }`
