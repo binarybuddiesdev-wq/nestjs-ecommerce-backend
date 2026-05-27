@@ -30,7 +30,11 @@ describe('AuthService', () => {
         id: 'user-1',
         email: 'test@example.com',
         password: 'hashed-password',
+        name: 'Test User',
+        avatar: null,
         role: 'CUSTOMER',
+        isActive: true,
+        address: [],
         createdAt: new Date(),
         updatedAt: new Date(),
     };
@@ -87,17 +91,18 @@ describe('AuthService', () => {
             vi.mocked(prisma.user.findUnique).mockResolvedValue(null);
             vi.mocked(prisma.user.create).mockResolvedValue(mockUser);
 
-            const result = await service.register({ email: 'test@example.com', password: 'password123' });
+            const result = await service.register({ email: 'test@example.com', password: 'password123', name: 'Test User' });
 
             expect(result).not.toHaveProperty('password');
             expect(result.email).toBe('test@example.com');
+            expect(result.name).toBe('Test User');
         });
 
         it('throws ConflictException if email already exists', async () => {
             vi.mocked(prisma.user.findUnique).mockResolvedValue(mockUser);
 
             await expect(
-                service.register({ email: 'test@example.com', password: 'password123' }),
+                service.register({ email: 'test@example.com', password: 'password123', name: 'Test User' }),
             ).rejects.toThrow(ConflictException);
         });
     });

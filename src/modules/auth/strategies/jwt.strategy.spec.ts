@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 
 import { JwtStrategy } from './jwt.strategy.js';
 import { PrismaService } from '@/prisma/prisma.service.js';
+import { UserRole } from '@/types/index.js';
 
 describe('JwtStrategy', () => {
     let strategy: JwtStrategy;
@@ -25,13 +26,13 @@ describe('JwtStrategy', () => {
     });
 
     it('returns user payload when user exists', async () => {
-        const mockUser = { id: 'user-1', email: 'test@example.com', role: 'ADMIN' };
+        const mockUser = { id: 'user-1', email: 'test@example.com', role: UserRole.ADMIN };
         // Assert findUnique as a mock function to configure mocked database response
         (prisma.user.findUnique as ReturnType<typeof vi.fn>).mockResolvedValue(mockUser);
 
-        const result = await strategy.validate({ sub: 'user-1', email: 'test@example.com', role: 'ADMIN' });
+        const result = await strategy.validate({ sub: 'user-1', email: 'test@example.com', role: UserRole.ADMIN });
 
-        expect(result).toEqual({ id: 'user-1', email: 'test@example.com', role: 'ADMIN' });
+        expect(result).toEqual({ id: 'user-1', email: 'test@example.com', role: UserRole.ADMIN });
     });
 
     it('throws UnauthorizedException when user not found', async () => {
@@ -39,7 +40,7 @@ describe('JwtStrategy', () => {
         (prisma.user.findUnique as ReturnType<typeof vi.fn>).mockResolvedValue(null);
 
         await expect(
-            strategy.validate({ sub: 'nonexistent', email: 'test@example.com', role: 'CUSTOMER' }),
+            strategy.validate({ sub: 'nonexistent', email: 'test@example.com', role: UserRole.CUSTOMER }),
         ).rejects.toThrow();
     });
 

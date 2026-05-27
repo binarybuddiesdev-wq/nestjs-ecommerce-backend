@@ -7,7 +7,7 @@ export const envSchema = z.object({
     CORS_ORIGIN: z.string().default('*'),
     JWT_SECRET: z.string().default('dev-secret-do-not-use-in-prod'),
     REFRESH_TOKEN_EXPIRY: z.coerce.number().default(604800000),
-}).refine((data) => {
+}).passthrough().refine((data) => {
     if (data.NODE_ENV !== 'test' && !data.DATABASE_URL) {
         return false;
     }

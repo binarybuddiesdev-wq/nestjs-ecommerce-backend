@@ -70,9 +70,33 @@ All tests successfully passing (61 unit/integration + 10 E2E tests) with 100% te
 
 ---
 
-## Phase 4 — Users & Seller Onboarding 🔴
+## Phase 4 — Users & Seller Onboarding 🟢
 
-Prompts will be recorded here when phase starts.
+### Prompts used:
+
+1. **Review, Optimization & Refactoring**:
+   ```text
+   Read agents.md and phases.md carefully before doing anything.
+
+   Your Role
+   You are Agent 4 — Reviewer first, then Agent 2 — Backend Developer 
+   for optimization only. Do not add new features. Do not write test 
+   cases. Only review, optimize, and fix what exists.
+
+   What Has Been Built
+   - Phase 2 — Base setup, health api, filters, interceptors, config
+   - Phase 3 — Auth (register, login, refresh, logout, me, JWT, guards, decorators)
+   - Phase 4 — Users and seller onboarding (profile, addresses, become-seller, admin user management)
+   ```
+
+2. **Complete Test Coverage**:
+   ```text
+   Write complete test coverage for Phase 4. Do not touch any existing 
+   passing tests. Do not modify any source files.
+   ```
+
+### Results:
+Successfully implemented unit test suites and corrected E2E tests for Phase 4. All 104 unit tests and 26 E2E tests pass with **99.46%** overall statement coverage.
 
 ---
 

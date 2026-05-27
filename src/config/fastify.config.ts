@@ -1,6 +1,7 @@
 import fastifyCors from '@fastify/cors';
 import fastifyHelmet from '@fastify/helmet';
 import fastifyRateLimit from '@fastify/rate-limit';
+import multipart from '@fastify/multipart';
 import { NestFastifyApplication } from '@nestjs/platform-fastify';
 
 export const registerFastifyPlugins = async (app: NestFastifyApplication) => {
@@ -33,5 +34,7 @@ export const registerFastifyPlugins = async (app: NestFastifyApplication) => {
         },
         timeWindow: '1 minute',
     });
+
+    await app.register(multipart);
 
 };

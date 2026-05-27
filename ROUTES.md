@@ -6,7 +6,7 @@
 - Auth: No
 - Role: Public
 - Description: Returns application health status
-- Response: { status: 'ok' }
+- Response: `{ status: 'ok' }`
 
 ## Auth
 
@@ -39,3 +39,79 @@
 - Role: Authenticated
 - Description: Returns profile information for the current user
 - Response: `{ success: true, message: 'User fetched successfully', data: { id, email, role, createdAt, updatedAt } }`
+
+## Users (Phase 4)
+
+### GET /api/v1/users/me
+- Auth: Yes
+- Role: Authenticated
+- Description: Returns profile information for the current user
+- Response: `{ success: true, message: 'Profile retrieved successfully', data: { id, email, role, name, avatar, address, isActive, createdAt, updatedAt } }`
+
+### PATCH /api/v1/users/me
+- Auth: Yes
+- Role: Authenticated
+- Description: Updates profile name and avatar URL for the current user
+- Response: `{ success: true, message: 'Profile updated successfully', data: { id, email, role, name, avatar, address, isActive, createdAt, updatedAt } }`
+
+### DELETE /api/v1/users/me
+- Auth: Yes
+- Role: Authenticated
+- Description: Soft deletes / deactivates the current user's account and revokes their active refresh tokens
+- Response: `{ success: true, message: 'Account deactivated successfully', data: {} }`
+
+### POST /api/v1/users/me/become-seller
+- Auth: Yes
+- Role: Authenticated
+- Description: Promotes the current user's role to SELLER
+- Response: `{ success: true, message: 'Seller role request submitted successfully', data: { id, email, role, name, avatar, address, isActive, createdAt, updatedAt } }`
+
+### POST /api/v1/users/me/address
+- Auth: Yes
+- Role: Authenticated
+- Description: Adds a new address to the user's list
+- Response: `{ success: true, message: 'Address added successfully', data: { id, email, role, name, avatar, address: [...], isActive, createdAt, updatedAt } }`
+
+### GET /api/v1/users/me/address
+- Auth: Yes
+- Role: Authenticated
+- Description: Lists all addresses for the current user
+- Response: `{ success: true, message: 'Addresses retrieved successfully', data: [ { id, label, street, city, state, zipCode, country, isDefault } ] }`
+
+### PATCH /api/v1/users/me/address/:id
+- Auth: Yes
+- Role: Authenticated
+- Description: Updates an address by its ID
+- Response: `{ success: true, message: 'Address updated successfully', data: { id, email, role, name, avatar, address: [...], isActive, createdAt, updatedAt } }`
+
+### DELETE /api/v1/users/me/address/:id
+- Auth: Yes
+- Role: Authenticated
+- Description: Deletes an address by its ID
+- Response: `{ success: true, message: 'Address deleted successfully', data: { id, email, role, name, avatar, address: [...], isActive, createdAt, updatedAt } }`
+
+### POST /api/v1/users/me/avatar
+- Auth: Yes
+- Role: Authenticated
+- Description: Uploads a profile avatar using multipart file upload, saved via Cloudinary
+- Response: `{ success: true, message: 'Avatar uploaded successfully', data: { id, email, role, name, avatar, address, isActive, createdAt, updatedAt } }`
+
+## Admin Users (Phase 4)
+
+### GET /api/v1/admin/users
+- Auth: Yes
+- Role: Admin
+- Description: Lists all registered users in the database
+- Response: `{ success: true, message: 'All Users retrieved successfully', data: [ { id, email, role, name, avatar, address, isActive, createdAt, updatedAt } ] }`
+
+### PATCH /api/v1/admin/users/:id/role
+- Auth: Yes
+- Role: Admin
+- Description: Updates a specific user's role
+- Response: `{ success: true, message: 'User role updated successfully', data: { id, email, role, name, avatar, address, isActive, createdAt, updatedAt } }`
+
+### DELETE /api/v1/admin/users/:id
+- Auth: Yes
+- Role: Admin
+- Description: Soft deletes / deactivates a user's account and revokes their active refresh tokens
+- Response: `{ success: true, message: 'User deleted successfully', data: { id, email, role, name, avatar, address, isActive, createdAt, updatedAt } }`

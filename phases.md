@@ -226,17 +226,17 @@ Custom decorators. This is the security foundation everything else depends on.
 - @Public() endpoint accessible without token
 
 ### Verification
-- [ ] pnpm exec tsc --noEmit
-- [ ] pnpm run build
-- [ ] pnpm run test
-- [ ] pnpm run test:coverage
-- [ ] pnpm run test:e2e
-- [ ] All auth endpoints visible in Swagger with lock icon
-- [ ] Token rotation verified in Postman
+- [x] pnpm exec tsc --noEmit
+- [x] pnpm run build
+- [x] pnpm run test
+- [x] pnpm run test:coverage
+- [x] pnpm run test:e2e
+- [x] All auth endpoints visible in Swagger with lock icon
+- [x] Token rotation verified in Postman
 
 ---
 
-## Phase 4 — Users & Seller Onboarding 🔴
+## Phase 4 — Users & Seller Onboarding 🟢
 
 ### Goal
 User profile management. Address management. Seller onboarding flow.
@@ -266,12 +266,12 @@ Admins can manage all users.
 - Non-admin cannot access admin endpoints
 
 ### Verification
-- [ ] pnpm exec tsc --noEmit
-- [ ] pnpm run build
-- [ ] pnpm run test
-- [ ] pnpm run test:coverage
-- [ ] pnpm run test:e2e
-- [ ] All endpoints in Swagger
+- [x] pnpm exec tsc --noEmit
+- [x] pnpm run build
+- [x] pnpm run test
+- [x] pnpm run test:coverage
+- [x] pnpm run test:e2e
+- [x] All endpoints in Swagger
 
 ---
 
@@ -639,7 +639,7 @@ Clean codebase ready for resume and interviews.
 | 1 | Project Scaffold & Package Installation | 🟢 |
 | 2 | Base Setup & Health API | 🟢 |
 | 3 | Auth | 🟢 |
-| 4 | Users & Seller Onboarding | 🔴 |
+| 4 | Users & Seller Onboarding | 🟢 |
 | 5 | Categories | 🔴 |
 | 6 | Products | 🔴 |
 | 7 | Cart | 🔴 |

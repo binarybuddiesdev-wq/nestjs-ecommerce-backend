@@ -42,9 +42,9 @@ describe('AuthController', () => {
     it('register calls service and returns wrapped response', async () => {
         mockAuthService.register.mockResolvedValue({ id: '1', email: 'a@b.com', role: 'CUSTOMER' });
 
-        const result = await controller.register({ email: 'a@b.com', password: 'password123' });
+        const result = await controller.register({ email: 'a@b.com', password: 'password123', name: 'Test User' });
 
-        expect(authService.register).toHaveBeenCalledWith({ email: 'a@b.com', password: 'password123' });
+        expect(authService.register).toHaveBeenCalledWith({ email: 'a@b.com', password: 'password123', name: 'Test User' });
         expect(result).toHaveProperty('message');
         expect(result).toHaveProperty('data');
     });

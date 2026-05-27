@@ -19,15 +19,22 @@ export class GlobalExceptionFilter implements ExceptionFilter {
         const reply = ctx.getResponse<FastifyReply>();
         const request = ctx.getRequest<FastifyRequest>();
 
-        const status = exception instanceof HttpException
-            ? exception.getStatus()
-            : HttpStatus.INTERNAL_SERVER_ERROR;
+        let status = HttpStatus.INTERNAL_SERVER_ERROR;
+        let message = 'Internal server error';
 
-        const exceptionResponse = exception instanceof HttpException
-            ? exception.getResponse()
-            : 'Internal server error';
-
-        const message = this.extractMessage(exception, exceptionResponse);
+        if (
+            typeof exception === 'object' &&
+            exception !== null &&
+            'statusCode' in exception &&
+            (exception as Record<string, unknown>).statusCode === 429
+        ) {
+            status = HttpStatus.TOO_MANY_REQUESTS;
+            message = 'Too many requests, please slow down';
+        } else if (exception instanceof HttpException) {
+            status = exception.getStatus();
+            const exceptionResponse = exception.getResponse();
+            message = this.extractMessage(exception, exceptionResponse);
+        }
 
         if (status >= 500) {
             this.logger.error(

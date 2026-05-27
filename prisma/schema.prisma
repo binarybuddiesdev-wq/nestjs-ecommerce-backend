@@ -15,11 +15,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+type Address {
+  id String
+  label String
+  street String
+  city String
+  state String
+  zipCode String
+  country String
+  isDefault Boolean @default(false)
+}
+
 model User {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   email String @unique
   password String
+  name String
+  avatar String?
   role String @default("CUSTOMER")
+  isActive Boolean @default(true)
+  address Address[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

@@ -1,10 +1,11 @@
-import { successResponseSchema } from "@/common/constants/index.js";
-
-export const registerUserSuccessMessage = 'User registered successfully';
-export const loginUserSuccessMessage = 'User logged in successfully';
-export const loggedInUserSuccessMessage = 'User fetched successfully';
-export const refreshSuccessMessage = 'Token refreshed successfully';
-export const logoutSuccessMessage = 'Logged out successfully';
+import {
+    successResponseSchema,
+    REGISTER_SUCCESS,
+    LOGIN_SUCCESS,
+    ME_SUCCESS,
+    REFRESH_SUCCESS,
+    LOGOUT_SUCCESS
+} from "@/common/constants/index.js";
 
 export const userDataSchema = {
     type: 'object',
@@ -19,8 +20,8 @@ export const userDataSchema = {
 
 export const RegisterUserResponse = {
     status: 201,
-    description: registerUserSuccessMessage,
-    ...successResponseSchema(userDataSchema, registerUserSuccessMessage),
+    description: REGISTER_SUCCESS,
+    ...successResponseSchema(userDataSchema, REGISTER_SUCCESS),
 };
 
 export const loginDataSchema = {
@@ -34,14 +35,14 @@ export const loginDataSchema = {
 
 export const LoginUserResponse = {
     status: 200,
-    description: loginUserSuccessMessage,
-    ...successResponseSchema(loginDataSchema, loginUserSuccessMessage),
+    description: LOGIN_SUCCESS,
+    ...successResponseSchema(loginDataSchema, LOGIN_SUCCESS),
 };
 
 export const MeUserResponse = {
     status: 200,
-    description: loggedInUserSuccessMessage,
-    ...successResponseSchema(userDataSchema, loggedInUserSuccessMessage),
+    description: ME_SUCCESS,
+    ...successResponseSchema(userDataSchema, ME_SUCCESS),
 };
 
 export const refreshDataSchema = {
@@ -54,12 +55,12 @@ export const refreshDataSchema = {
 
 export const RefreshUserResponse = {
     status: 200,
-    description: refreshSuccessMessage,
-    ...successResponseSchema(refreshDataSchema, refreshSuccessMessage),
+    description: REFRESH_SUCCESS,
+    ...successResponseSchema(refreshDataSchema, REFRESH_SUCCESS),
 };
 
 export const LogoutUserResponse = {
     status: 200,
-    description: logoutSuccessMessage,
-    ...successResponseSchema({ type: 'object', properties: {} }, logoutSuccessMessage),
+    description: LOGOUT_SUCCESS,
+    ...successResponseSchema({ type: 'object', properties: {} }, LOGOUT_SUCCESS),
 };

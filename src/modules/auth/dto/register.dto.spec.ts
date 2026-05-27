@@ -8,6 +8,7 @@ describe('RegisterDto', () => {
         const dto = new RegisterDto();
         dto.email = 'test@example.com';
         dto.password = 'StrongPass1!';
+        dto.name = 'Test User';
 
         const errors = await validate(dto);
         expect(errors.length).toBe(0);
@@ -17,6 +18,7 @@ describe('RegisterDto', () => {
         const dto = new RegisterDto();
         dto.email = '';
         dto.password = 'StrongPass1!';
+        dto.name = 'Test User';
 
         const errors = await validate(dto);
         expect(errors.length).toBeGreaterThan(0);
@@ -26,6 +28,7 @@ describe('RegisterDto', () => {
         const dto = new RegisterDto();
         dto.email = 'not-an-email';
         dto.password = 'StrongPass1!';
+        dto.name = 'Test User';
 
         const errors = await validate(dto);
         expect(errors.length).toBeGreaterThan(0);
@@ -35,6 +38,7 @@ describe('RegisterDto', () => {
         const dto = new RegisterDto();
         dto.email = 'test@example.com';
         dto.password = '123';
+        dto.name = 'Test User';
 
         const errors = await validate(dto);
         expect(errors.length).toBeGreaterThan(0);

@@ -1,12 +1,13 @@
 import * as crypto from 'node:crypto';
 
-import { PrismaService } from '@/prisma/prisma.service.js';
-import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
+import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 
+import { PrismaService } from '@/prisma/prisma.service.js';
+import { EMAIL_IN_USE, INVALID_CREDENTIALS, INVALID_REFRESH_TOKEN, USER_NO_LONGER_EXISTS, USER_NOT_FOUND } from '@/common/index.js';
 import { LoginDto, RefreshDto, RegisterDto } from './dto/index.js';
 
 @Injectable()
@@ -25,17 +26,17 @@ export class AuthService {
     }
 
     async register(dto: RegisterDto) {
-        const { email, password } = dto;
+        const { email, password, name } = dto;
 
         const existingUser = await this.prisma.user.findUnique({ where: { email } });
         if (existingUser) {
-            throw new ConflictException('Email already in use');
+            throw new ConflictException(EMAIL_IN_USE);
         }
 
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        const newUser = await this.prisma.user.create({ data: { email, password: hashedPassword } });
+        const newUser = await this.prisma.user.create({ data: { email, password: hashedPassword, name } });
 
         this.logger.info({ userId: newUser.id }, 'User registered successfully');
 
@@ -50,12 +51,18 @@ export class AuthService {
 
         const existingUser = await this.prisma.user.findUnique({ where: { email } });
         if (!existingUser) {
-            throw new UnauthorizedException('Invalid credentials');
+            throw new UnauthorizedException(INVALID_CREDENTIALS);
+        }
+
+        this.logger.info({ isActive: existingUser.isActive, typeof: typeof existingUser.isActive, strict: existingUser.isActive === false }, 'DEBUG isActive check');
+
+        if (existingUser.isActive === false) {
+            throw new UnauthorizedException('Account has been deactivated');
         }
 
         const isPasswordValid = await bcrypt.compare(password, existingUser.password);
         if (!isPasswordValid) {
-            throw new UnauthorizedException('Invalid credentials');
+            throw new UnauthorizedException(INVALID_CREDENTIALS);
         }
 
         const payload = { sub: existingUser.id, email: existingUser.email, role: existingUser.role };
@@ -75,7 +82,7 @@ export class AuthService {
         });
 
         if (!existingUser) {
-            throw new NotFoundException('User not found');
+            throw new NotFoundException(USER_NOT_FOUND);
         }
 
         const { password: _, ...user } = existingUser;
@@ -89,7 +96,7 @@ export class AuthService {
         });
 
         if (!stored || stored.isRevoked || stored.expiresAt < new Date()) {
-            throw new UnauthorizedException('Invalid refresh token');
+            throw new UnauthorizedException(INVALID_REFRESH_TOKEN);
         }
 
         await this.prisma.refreshToken.update({
@@ -99,7 +106,7 @@ export class AuthService {
 
         const user = await this.prisma.user.findUnique({ where: { id: stored.userId } });
         if (!user) {
-            throw new UnauthorizedException('User no longer exists');
+            throw new UnauthorizedException(USER_NO_LONGER_EXISTS);
         }
 
         const payload = { sub: user.id, email: user.email, role: user.role };

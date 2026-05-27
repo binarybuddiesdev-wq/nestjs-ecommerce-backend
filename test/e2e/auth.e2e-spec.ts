@@ -22,6 +22,7 @@ describe('Auth (e2e)', () => {
     const testUser = {
         email: 'e2e-test@example.com',
         password: 'StrongPass123!',
+        name: 'E2E Test User',
     };
 
     beforeAll(async () => {
@@ -92,6 +93,7 @@ describe('Auth (e2e)', () => {
         const body = JSON.parse(result.body);
         expect(body.success).toBe(true);
         expect(body.data.email).toBe(testUser.email);
+        expect(body.data.name).toBe(testUser.name);
         expect(body.data).not.toHaveProperty('password');
     });
 
@@ -109,7 +111,7 @@ describe('Auth (e2e)', () => {
         const result = await app.inject({
             method: 'POST',
             url: '/api/v1/auth/login',
-            payload: testUser,
+            payload: { email: testUser.email, password: testUser.password },
         });
 
         expect(result.statusCode).toBe(200);
@@ -126,7 +128,7 @@ describe('Auth (e2e)', () => {
         const result = await app.inject({
             method: 'POST',
             url: '/api/v1/auth/login',
-            payload: { ...testUser, password: 'wrong' },
+            payload: { email: testUser.email, password: 'wrong' },
         });
 
         expect(result.statusCode).toBe(401);

@@ -15,10 +15,10 @@ export const setupSwagger = (app: NestFastifyApplication) => {
         swaggerOptions: {
             persistAuthorization: true,
             displayRequestDuration: true,
-            docExpansion: 'full',
+            docExpansion: 'list',
             filter: true,
             showExtensions: true,
-            tryItOutEnabled: false,
+            tryItOutEnabled: true,
         }
     });
 };
