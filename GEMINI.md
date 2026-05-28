@@ -15,25 +15,25 @@ Also read `ROUTES.md` to understand all existing routes.
 
 This project uses Logseq as the persistent knowledge base via the logseq MCP tool.
 
-### BEFORE responding to ANY message — no exceptions:
+### BEFORE responding to ANY message related to this project — no exceptions:
 
 * Read `projects/nestjs-ecommerce-backend` from Logseq
 * Read `global/preferences` from Logseq
 * If Logseq is unreachable, say so immediately and ask the user to open it before continuing
 
-### AFTER every meaningful action — no exceptions:
+### AFTER every meaningful PROJECT-RELATED action — no exceptions:
 
-* Any important decision made → update `projects/nestjs-ecommerce-backend` immediately
-* Any bug fixed → update with root cause and exact fix applied
+* Any important project decision made → update `projects/nestjs-ecommerce-backend` immediately
+* Any project-related bug fixed → update with root cause and exact fix applied
 * Any new pattern, architecture, or backend workflow → update `projects/nestjs-ecommerce-backend`
 * Any API contract, validation rule, or DTO change → update `projects/nestjs-ecommerce-backend`
 * Any database schema, migration, or Prisma model change → update `projects/nestjs-ecommerce-backend`
 * Any authentication, authorization, or security-related implementation → update `projects/nestjs-ecommerce-backend`
 * Any performance optimization or caching strategy → update `projects/nestjs-ecommerce-backend`
-* Any correction or preference from the user → update `global/preferences` immediately
-* Never wait until end of session — update continuously as work progresses
+* Any correction or preference from the user related to coding, architecture, workflow, or response style → update `global/preferences` immediately
+* Never wait until end of session — update continuously as relevant project work progresses
 
-### DURING implementation and reviews:
+### DURING project implementation and reviews:
 
 * Track module boundaries and responsibility decisions
 * Track service-layer and repository-layer conventions
@@ -43,18 +43,19 @@ This project uses Logseq as the persistent knowledge base via the logseq MCP too
 * Track dependency decisions and why they were chosen
 * Track reusable utilities, guards, interceptors, decorators, and middleware patterns
 * Track testing approaches and important edge cases covered
-* Track rejected approaches when they are important for future context
+* Track rejected approaches when they are important for future project context
 
-### BEFORE ending any session:
+### BEFORE ending any PROJECT-RELATED session:
 
-* Write a complete summary of everything done during the session to `projects/nestjs-ecommerce-backend`
+* Write a complete summary of all relevant project work completed during the session to `projects/nestjs-ecommerce-backend`
 * Include pending tasks, blockers, known issues, and recommended next steps
-* Confirm to the user that Logseq memory has been updated before closing
+* Do NOT store unrelated conversations, casual discussions, or non-project topics
+* Confirm to the user that relevant project memory has been updated before closing
 
 ### FAILURE CONDITION:
 
-* If you skip reading memory before starting, you have failed
-* If you fail to update important decisions during the session, you have failed
-* If session learnings are not persisted before ending, you have failed
+* If you skip reading memory before starting project work, you have failed
+* If you fail to update important project decisions during the session, you have failed
+* If relevant project learnings are not persisted before ending, you have failed
 
 ---
