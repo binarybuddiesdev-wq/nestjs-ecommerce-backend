@@ -10,30 +10,31 @@ Also read `ROUTES.md` to understand all existing routes.
 
 ---
 
-
 ## Logseq Memory (MANDATORY — HIGHEST PRIORITY)
 
 This project uses Logseq as the persistent knowledge base via the logseq MCP tool.
 
-### BEFORE responding to ANY message related to this project — no exceptions:
-
-* Read `projects/nestjs-ecommerce-backend` from Logseq
-* Read `global/preferences` from Logseq
-* If Logseq is unreachable, say so immediately and ask the user to open it before continuing
+### BEFORE responding to ANY PROJECT-RELATED message — no exceptions:
+1. Read `projects/nestjs-ecommerce-backend` — project index and current phase status
+2. Read `projects/nestjs-ecommerce-backend/architecture` — all static rules, patterns and conventions
+3. Read `projects/nestjs-ecommerce-backend/phases` — phase history and active phase details
+4. Read `global/preferences` — personal preferences and working style
+- If Logseq is unreachable, say so immediately and ask the user to open it before continuing
 
 ### AFTER every meaningful PROJECT-RELATED action — no exceptions:
 
-* Any important project decision made → update `projects/nestjs-ecommerce-backend` immediately
-* Any project-related bug fixed → update with root cause and exact fix applied
-* Any new pattern, architecture, or backend workflow → update `projects/nestjs-ecommerce-backend`
-* Any API contract, validation rule, or DTO change → update `projects/nestjs-ecommerce-backend`
-* Any database schema, migration, or Prisma model change → update `projects/nestjs-ecommerce-backend`
-* Any authentication, authorization, or security-related implementation → update `projects/nestjs-ecommerce-backend`
-* Any performance optimization or caching strategy → update `projects/nestjs-ecommerce-backend`
-* Any correction or preference from the user related to coding, architecture, workflow, or response style → update `global/preferences` immediately
+* Architecture decision, pattern, or convention → update `projects/nestjs-ecommerce-backend/architecture` immediately
+* Bug fixed → update with root cause and exact fix in `projects/nestjs-ecommerce-backend/architecture`
+* API contract, validation rule, or DTO change → update `projects/nestjs-ecommerce-backend/architecture`
+* Database schema, migration, or Prisma model change → update `projects/nestjs-ecommerce-backend/architecture`
+* Auth, authorization, or security implementation → update `projects/nestjs-ecommerce-backend/architecture`
+* Performance optimization or caching strategy → update `projects/nestjs-ecommerce-backend/architecture`
+* Phase completed → update `projects/nestjs-ecommerce-backend/phases` and update the index page status
+* New phase started → create `projects/nestjs-ecommerce-backend/phase-X-name` page for active work
+* User preference or correction related to coding, architecture, workflow, or response style → update `global/preferences` immediately
 * Never wait until end of session — update continuously as relevant project work progresses
 
-### DURING project implementation and reviews:
+### DURING PROJECT implementation and reviews:
 
 * Track module boundaries and responsibility decisions
 * Track service-layer and repository-layer conventions
@@ -43,19 +44,18 @@ This project uses Logseq as the persistent knowledge base via the logseq MCP too
 * Track dependency decisions and why they were chosen
 * Track reusable utilities, guards, interceptors, decorators, and middleware patterns
 * Track testing approaches and important edge cases covered
-* Track rejected approaches when they are important for future project context
+* Track rejected approaches when important for future context
 
 ### BEFORE ending any PROJECT-RELATED session:
 
-* Write a complete summary of all relevant project work completed during the session to `projects/nestjs-ecommerce-backend`
+* Write a complete summary of all PROJECT-RELATED work done to the active phase page
+* Update `projects/nestjs-ecommerce-backend` index if phase status changed
 * Include pending tasks, blockers, known issues, and recommended next steps
 * Do NOT store unrelated conversations, casual discussions, or non-project topics
 * Confirm to the user that relevant project memory has been updated before closing
 
 ### FAILURE CONDITION:
 
-* If you skip reading memory before starting project work, you have failed
-* If you fail to update important project decisions during the session, you have failed
-* If relevant project learnings are not persisted before ending, you have failed
-
----
+* If you skip reading all 4 pages before starting PROJECT-RELATED work, you have failed
+* If you fail to update the right page immediately after important PROJECT-RELATED decisions, you have failed
+* If relevant PROJECT-RELATED learnings are not persisted before ending the session, you have failed
