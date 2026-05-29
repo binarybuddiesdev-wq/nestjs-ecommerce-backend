@@ -12,6 +12,7 @@
 ## Step 3 — Verify Server is Running
 - The 🔌 icon should show the server is active
 - If it shows stopped, click it and start again
+- uvx mcp-logseq
 
 ## Step 4 — Start your AI tool (Antigravity / OpenCode)
 - Open Antigravity IDE or OpenCode terminal

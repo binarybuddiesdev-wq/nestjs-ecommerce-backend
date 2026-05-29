@@ -54,8 +54,6 @@ export class AuthService {
             throw new UnauthorizedException(INVALID_CREDENTIALS);
         }
 
-        this.logger.info({ isActive: existingUser.isActive, typeof: typeof existingUser.isActive, strict: existingUser.isActive === false }, 'DEBUG isActive check');
-
         if (existingUser.isActive === false) {
             throw new UnauthorizedException('Account has been deactivated');
         }
