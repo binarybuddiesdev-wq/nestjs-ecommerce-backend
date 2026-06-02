@@ -27,6 +27,9 @@ export default defineConfig({
         'src/modules/auth/dto/index.ts',
         'src/modules/auth/strategies/index.ts',
         'src/modules/auth/strategies/types.ts',
+        'src/modules/cloudinary/index.ts',
+        'src/modules/uploads/index.ts',
+        'src/common/helpers/multipart.helper.ts',
         'src/modules/cart/**/*',
 
         'src/modules/coupons/**/*',

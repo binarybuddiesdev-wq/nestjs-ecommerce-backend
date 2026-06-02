@@ -4,6 +4,7 @@ export enum ApiTags {
     USERS = 'Users',
     CATEGORIES = 'Categories',
     PRODUCTS = 'Products',
+    UPLOADS = 'Uploads',
     CART = 'Cart',
     ORDERS = 'Orders',
     PAYMENTS = 'Payments',
@@ -30,6 +31,16 @@ export enum ApiRoutes {
     CATEGORIES = 'categories',
     ADMIN_CATEGORIES = 'admin/categories',
     CATEGORY_BY_SLUG = ':slug',
+    PRODUCTS = 'products',
+    PRODUCT_BY_SLUG = ':slug',
+    PRODUCT_BY_ID = ':id',
+    SELLER_PRODUCTS = 'seller/products',
+    ADMIN_PRODUCTS = 'admin/products',
+    PRODUCT_IMAGES = ':id/images',
+    PRODUCT_IMAGE_BY_INDEX = ':id/images/:index',
+    PRODUCT_RELATED = ':id/related',
+    PRODUCT_RELATED_BY_ID = ':id/related/:relatedId',
+    UPLOADS = 'uploads',
 }
 
 export enum ApiOperation {
@@ -56,6 +67,19 @@ export enum ApiOperation {
     CATEGORY_GET_BY_SLUG = 'Get category by slug',
     CATEGORY_UPDATE = 'Update a category',
     CATEGORY_DELETE = 'Delete a category',
+    PRODUCT_CREATE = 'Create a new product',
+    PRODUCT_LIST = 'List all active products',
+    PRODUCT_GET_BY_SLUG = 'Get product by slug',
+    PRODUCT_UPDATE = 'Update a product',
+    PRODUCT_DELETE = 'Delete a product',
+    SELLER_LIST_PRODUCTS = 'List own products (Seller)',
+    ADMIN_LIST_PRODUCTS = 'List all products (Admin)',
+    UPLOAD_IMAGES = 'Upload images',
+    PRODUCT_ADD_IMAGES = 'Add images to product',
+    PRODUCT_REMOVE_IMAGE = 'Remove image from product',
+    PRODUCT_GET_RELATED = 'Get related products',
+    PRODUCT_SET_RELATED = 'Set related products',
+    PRODUCT_REMOVE_RELATED = 'Remove a related product',
 }
 
 export const HEALTH_SUCCESS_MESSAGE = 'Health check passed';
@@ -80,11 +104,26 @@ export const LIST_ALL_USERS_SUCCESS = 'All Users retrieved successfully';
 export const UPDATE_USER_ROLE_SUCCESS = 'User role updated successfully';
 export const DELETE_ADMIN_USER_SUCCESS = 'User deleted successfully';
 export const AVATAR_UPLOAD_SUCCESS = 'Avatar uploaded successfully';
+export const UPLOAD_SUCCESS = 'Images uploaded successfully';
 export const CATEGORY_CREATED_SUCCESS = 'Category created successfully';
 export const CATEGORY_TREE_SUCCESS = 'Category tree retrieved successfully';
 export const CATEGORY_FETCHED_SUCCESS = 'Category retrieved successfully';
 export const CATEGORY_UPDATED_SUCCESS = 'Category updated successfully';
 export const CATEGORY_DELETED_SUCCESS = 'Category deleted successfully';
+
+// Product Success Messages
+export const PRODUCT_CREATED_SUCCESS = 'Product created successfully';
+export const PRODUCT_LIST_SUCCESS = 'Products retrieved successfully';
+export const PRODUCT_FETCHED_SUCCESS = 'Product retrieved successfully';
+export const PRODUCT_UPDATED_SUCCESS = 'Product updated successfully';
+export const PRODUCT_DELETED_SUCCESS = 'Product deleted successfully';
+export const SELLER_PRODUCTS_SUCCESS = 'Seller products retrieved successfully';
+export const ADMIN_PRODUCTS_SUCCESS = 'All products retrieved successfully';
+export const PRODUCT_IMAGES_ADDED_SUCCESS = 'Images added to product successfully';
+export const PRODUCT_IMAGE_REMOVED_SUCCESS = 'Image removed from product successfully';
+export const PRODUCT_RELATED_SUCCESS = 'Related products retrieved successfully';
+export const PRODUCT_RELATED_SET_SUCCESS = 'Related products updated successfully';
+export const PRODUCT_RELATED_REMOVED_SUCCESS = 'Related product removed successfully';
 
 // Error Messages
 export const EMAIL_IN_USE = 'Email already in use';
@@ -102,6 +141,12 @@ export const CATEGORY_NOT_FOUND = 'Category not found';
 export const CATEGORY_SLUG_EXISTS = 'Category slug already exists';
 export const PARENT_CATEGORY_NOT_FOUND = 'Parent category not found';
 export const CATEGORY_HAS_PRODUCTS = 'Cannot delete category with active products';
+export const PRODUCT_NOT_FOUND = 'Product not found';
+export const PRODUCT_SLUG_EXISTS = 'Product slug already exists';
+export const RELATED_PRODUCT_NOT_FOUND = 'One or more related products not found';
+export const PRODUCT_NOT_OWNER = 'You can only modify your own products';
+export const CATEGORY_NOT_ACTIVE = 'Selected category is not active';
+export const INVALID_IMAGE_INDEX = 'Invalid image index';
 
 export const successResponseSchema = (dataSchema: Record<string, unknown>, message: string) => ({
     schema: {

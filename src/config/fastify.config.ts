@@ -35,6 +35,10 @@ export const registerFastifyPlugins = async (app: NestFastifyApplication) => {
         timeWindow: '1 minute',
     });
 
-    await app.register(multipart);
+    await app.register(multipart, {
+        limits: {
+            fileSize: 10 * 1024 * 1024,
+        },
+    });
 
 };

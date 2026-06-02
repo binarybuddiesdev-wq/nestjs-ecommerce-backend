@@ -46,6 +46,9 @@ This project uses Logseq as the persistent knowledge base via the logseq MCP too
 * Track testing approaches and important edge cases covered
 * Track rejected approaches when important for future context
 
+### Learning Workflow Reference
+- Read `projects/nestjs-ecommerce-backend/coding-rules` — documents the step-by-step workflow and explanation format used in this project for AI-guided development
+
 ### BEFORE ending any PROJECT-RELATED session:
 
 * Write a complete summary of all PROJECT-RELATED work done to the active phase page

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { v2 as cloudinary } from 'cloudinary';
 
@@ -14,10 +14,18 @@ export class CloudinaryService {
     }
 
     async uploadImage(filePath: string): Promise<string> {
-        const result = await cloudinary.uploader.upload(filePath, {
-            folder: 'ecommerce',
-        });
-        return result.secure_url;
+        try {
+            const result = await cloudinary.uploader.upload(filePath, {
+                folder: 'ecommerce',
+            });
+            return result.secure_url;
+        } catch (error: unknown) {
+            const message = error instanceof Error ? error.message : 'Unknown upload error';
+            if (message.includes('Invalid image file')) {
+                throw new BadRequestException('Uploaded file must be a valid image');
+            }
+            throw new InternalServerErrorException(`Image upload failed: ${message}`);
+        }
     }
 
 }

@@ -71,12 +71,46 @@ Available in development only:
       modules/       — feature modules: auth, users, products, cart, orders, payments etc.
       types/         — all TypeScript interfaces and types
 
+## Seed Scripts
+
+Standalone ESM scripts in `scripts/` for setting up demo data. Each script
+auto-loads `.env` — no manual configuration needed.
+
+| Script | Purpose |
+|--------|---------|
+| `create-user.mjs` | Create a user (edit `USER_CONFIG` at top, then run) |
+| `seed-categories.mjs` | Upsert 60 categories (10 roots, safe to re-run) |
+| `seed-products.mjs` | Seed ~3,890 products with real names & prices |
+| `seed-products-plan.md` | Full product listing reference for review |
+| `PROMPTS.md` | Prompts & instructions for AI-assisted seeding |
+
+All scripts run with: `node scripts/<name>.mjs`
+
+The product seeder (`seed-products.mjs`) also handles image sourcing —
+searches the web for real product images, uploads to Cloudinary, and links
+them to the product records. See `scripts/PROMPTS.md` for the full workflow.
+
 ## Concepts
 
 Key concepts and patterns used in this project are documented in
 [docs/concepts/](docs/concepts/). Each concept gets its own markdown file
 with real-world examples and in-depth explanations — useful when you're
 learning a pattern for the first time.
+
+## Seed Scripts
+
+| Script | Description |
+|--------|-------------|
+| `scripts/create-user.mjs` | Create a user (edit config at top) |
+| `scripts/seed-categories.mjs` | Seed 60 categories (upsert, safe to re-run) |
+| `scripts/seed-products.mjs` | Seed ~4,342 products across 39 leaf categories |
+| `scripts/product-data.mjs` | Complete product listing data |
+
+**Full setup:** `node scripts/create-user.mjs && node scripts/seed-categories.mjs && node scripts/seed-products.mjs`
+
+Products are seeded with empty `images` array. Upload images via `POST /api/v1/products/:id/images` multipart endpoint.
+
+---
 
 ## API Response Shape
 
@@ -98,7 +132,7 @@ Health endpoint returns:
 | 3 | Auth | 🟢 |
 | 4 | Users & Seller Onboarding | 🟢 |
 | 5 | Categories | 🟢 |
-| 6 | Products | 🔴 |
+| 6 | Products | 🟢 |
 | 7 | Cart | 🔴 |
 | 8 | Orders & State Machine | 🔴 |
 | 9 | Payments | 🔴 |

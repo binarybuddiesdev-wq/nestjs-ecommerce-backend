@@ -59,3 +59,37 @@ model Category {
   parent Category? @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   children Category[] @relation("CategoryHierarchy")
 }
+
+model Product {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  slug String @unique
+  description String
+  brand String?
+  price Float
+  compareAtPrice Float?
+  stock Int
+  soldCount Int @default(0)
+  images String[]
+  tags String[]
+  weight Float?
+  dimensions String?
+  warrantyInfo String?
+  expiryDate DateTime?
+  rating Float @default(0)
+  ratingCount Int @default(0)
+  reviewCount Int @default(0)
+  relatedProductIds String[]
+  categoryId String @db.ObjectId
+  sellerId String @db.ObjectId
+  isActive Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([categoryId])
+  @@index([sellerId])
+  @@index([price])
+  @@index([createdAt])
+  @@index([brand])
+  @@index([rating])
+}

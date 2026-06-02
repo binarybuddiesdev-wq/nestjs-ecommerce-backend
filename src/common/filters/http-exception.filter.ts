@@ -37,9 +37,9 @@ export class GlobalExceptionFilter implements ExceptionFilter {
         }
 
         if (status >= 500) {
+            const errorMessage = exception instanceof Error ? `${exception.message}\n${exception.stack}` : JSON.stringify(exception);
             this.logger.error(
-                `HTTP ${status} Error`,
-                exception instanceof Error ? exception.stack : JSON.stringify(exception),
+                `HTTP ${status} Error: ${errorMessage}`,
                 `${request.method} ${request.url}`
             );
         } else {

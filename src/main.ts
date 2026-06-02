@@ -8,7 +8,7 @@ import { configureApp } from './config/index.js'
 async function bootstrap(): Promise<void> {
 
     const app = await NestFactory.create<NestFastifyApplication>(
-        AppModule, new FastifyAdapter(), { bufferLogs: true }
+        AppModule, new FastifyAdapter({ bodyLimit: 10 * 1024 * 1024 }), { bufferLogs: true }
     );
 
     await configureApp(app)

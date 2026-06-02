@@ -309,29 +309,30 @@ Hierarchical category tree. Admin only for mutations. Public for reads.
 
 ---
 
-## Phase 6 — Products 🔴
+## Phase 6 — Products 🟢
 
 ### Goal
 Full product CRUD for Sellers. Public search, filter, pagination for Customers.
 Sellers can only manage their own products.
 
-### Tasks
-- Product schema — id, name, slug, description, price, stock, images[], categoryId, sellerId, isActive, createdAt, updatedAt
-- POST /api/v1/products — Seller only, create product
-- GET /api/v1/products — public, list with filters + cursor pagination + search
-- GET /api/v1/products/:slug — public, single product detail
-- PATCH /api/v1/products/:id — Seller only, update own product
-- DELETE /api/v1/products/:id — Seller only, soft delete own product
-- GET /api/v1/seller/products — Seller only, own products list
-- GET /api/v1/admin/products — Admin only, all products regardless of seller
-- Filters: category, minPrice, maxPrice, inStock, isActive
-- Sorting: price asc/desc, createdAt asc/desc, name asc/desc
-- Full-text search on name and description
-- Cursor-based pagination — never offset
-- Cloudinary image upload — multiple images per product
-- Prisma indexes on: categoryId, sellerId, price, createdAt
-- Redis cache on public product list — invalidated on mutation
-- Full Swagger docs with query param documentation
+### Tasks (12 API Endpoints + 1 Enhancement)
+
+**API Endpoints (12/12)**
+- POST /api/v1/products — Create (Seller/Admin, multipart) ✅
+- GET /api/v1/products — List (Public, filters: category, brand, tag, price range, inStock, full-text search name+description, cursor pagination, sort) ✅
+- GET /api/v1/products/:slug — Detail (Public, active only) ✅
+- PATCH /api/v1/products/:id — Update (Seller/Admin, multipart, all fields, ADMIN bypasses ownership) ✅
+- DELETE /api/v1/products/:id — Soft delete (Seller/Admin, idempotent, ADMIN bypass) ✅
+- GET /api/v1/seller/products — Own products (Seller, cursor pagination) ✅
+- GET /api/v1/admin/products — All products (Admin, includes inactive, cursor pagination) ✅
+- POST /api/v1/products/:id/images — Add images (Seller/Admin, multipart, appends) ✅
+- DELETE /api/v1/products/:id/images/:index — Remove image by index (Seller/Admin, validates bounds) ✅
+- GET /api/v1/products/:id/related — Related products (Public, resolves IDs to full objects, active only) ✅
+- POST /api/v1/products/:id/related — Set related (Seller/Admin, validates IDs exist) ✅
+- DELETE /api/v1/products/:id/related/:relatedId — Remove related (Seller/Admin) ✅
+
+**Enhancements**
+- Redis cache on GET /api/v1/products — invalidated on mutation 🟢
 
 ### Test Tasks
 - Seller can create and manage own products
@@ -341,15 +342,19 @@ Sellers can only manage their own products.
 - Cursor pagination returns correct pages
 - Out of stock products filtered correctly
 - Cache invalidated on product update
+- Tag filter returns correct results
+- Image management endpoints work for existing products
+- Related products endpoints return correct data
+- Seller can add/remove related product links
 
 ### Verification
-- [ ] pnpm exec tsc --noEmit
-- [ ] pnpm run build
-- [ ] pnpm run test
-- [ ] pnpm run test:coverage
-- [ ] pnpm run test:e2e
-- [ ] Search and filters tested in Postman
-- [ ] Swagger shows all query params
+- [x] pnpm exec tsc --noEmit
+- [x] pnpm run build
+- [x] pnpm run test
+- [x] pnpm run test:coverage
+- [x] pnpm run test:e2e
+- [x] Search and filters tested in Postman
+- [x] Swagger shows all query params
 
 ---
 
@@ -641,8 +646,8 @@ Clean codebase ready for resume and interviews.
 | 3 | Auth | 🟢 |
 | 4 | Users & Seller Onboarding | 🟢 |
 | 5 | Categories | 🟢 |
-| 6 | Products | 🔴 |
-| 7 | Cart | 🔴 |
+| 6 | Products | 🟢 |
+| 7 | Cart | 🟡 |
 | 8 | Orders & State Machine | 🔴 |
 | 9 | Payments | 🔴 |
 | 10 | Reviews & Coupons | 🔴 |
