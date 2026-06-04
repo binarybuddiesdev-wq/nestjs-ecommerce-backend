@@ -26,6 +26,19 @@ type Address {
   isDefault Boolean @default(false)
 }
 
+type CartItem {
+  productId String
+  quantity Int
+}
+
+model Cart {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @unique @db.ObjectId
+  items CartItem[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model User {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   email String @unique

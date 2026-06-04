@@ -41,6 +41,9 @@ export enum ApiRoutes {
     PRODUCT_RELATED = ':id/related',
     PRODUCT_RELATED_BY_ID = ':id/related/:relatedId',
     UPLOADS = 'uploads',
+    CART = 'cart',
+    CART_ITEMS = 'items',
+    CART_ITEM_BY_PRODUCT = 'items/:productId',
 }
 
 export enum ApiOperation {
@@ -80,6 +83,11 @@ export enum ApiOperation {
     PRODUCT_GET_RELATED = 'Get related products',
     PRODUCT_SET_RELATED = 'Set related products',
     PRODUCT_REMOVE_RELATED = 'Remove a related product',
+    CART_ADD_ITEM = 'Add item to cart',
+    CART_GET = 'Get current cart',
+    CART_UPDATE_ITEM = 'Update cart item quantity',
+    CART_REMOVE_ITEM = 'Remove items from cart',
+    CART_CLEAR = 'Clear entire cart',
 }
 
 export const HEALTH_SUCCESS_MESSAGE = 'Health check passed';
@@ -125,6 +133,13 @@ export const PRODUCT_RELATED_SUCCESS = 'Related products retrieved successfully'
 export const PRODUCT_RELATED_SET_SUCCESS = 'Related products updated successfully';
 export const PRODUCT_RELATED_REMOVED_SUCCESS = 'Related product removed successfully';
 
+// Cart Success Messages
+export const CART_ITEM_ADDED_SUCCESS = 'Item added to cart successfully';
+export const CART_RETRIEVED_SUCCESS = 'Cart retrieved successfully';
+export const CART_ITEM_UPDATED_SUCCESS = 'Cart item updated successfully';
+export const CART_ITEM_REMOVED_SUCCESS = 'Item removed from cart successfully';
+export const CART_CLEARED_SUCCESS = 'Cart cleared successfully';
+
 // Error Messages
 export const EMAIL_IN_USE = 'Email already in use';
 export const INVALID_CREDENTIALS = 'Invalid credentials';
@@ -147,6 +162,11 @@ export const RELATED_PRODUCT_NOT_FOUND = 'One or more related products not found
 export const PRODUCT_NOT_OWNER = 'You can only modify your own products';
 export const CATEGORY_NOT_ACTIVE = 'Selected category is not active';
 export const INVALID_IMAGE_INDEX = 'Invalid image index';
+
+// Cart Error Messages
+export const CART_ITEM_NOT_FOUND = 'Item not found in cart';
+export const CART_PRODUCT_INACTIVE = 'Product is no longer available';
+export const CART_INSUFFICIENT_STOCK = 'Insufficient stock for this product';
 
 export const successResponseSchema = (dataSchema: Record<string, unknown>, message: string) => ({
     schema: {

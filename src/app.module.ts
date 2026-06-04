@@ -15,6 +15,7 @@ import { UsersModule } from './modules/users/users.module.js';
 import { CategoriesModule } from './modules/categories/categories.module.js';
 import { ProductsModule } from './modules/products/products.module.js';
 import { UploadsModule } from './modules/uploads/uploads.module.js';
+import { CartModule } from './modules/cart/cart.module.js';
 
 @Module({
     imports: [
@@ -32,7 +33,7 @@ import { UploadsModule } from './modules/uploads/uploads.module.js';
             }),
         }),
         PrismaModule, HealthModule, AuthModule, CloudinaryModule, UsersModule, CategoriesModule,
-        ProductsModule, UploadsModule
+        ProductsModule, UploadsModule, CartModule
     ],
     controllers: [],
     providers: [],

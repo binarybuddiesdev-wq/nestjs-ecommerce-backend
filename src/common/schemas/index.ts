@@ -3,3 +3,4 @@ export * from './users/index.js';
 export * from './categories/index.js';
 export * from './products/index.js';
 export * from './uploads/index.js';
+export * from './cart/index.js';

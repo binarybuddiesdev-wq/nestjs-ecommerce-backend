@@ -227,3 +227,32 @@
 - Description: Removes a related product relationship from a product
 - Response: `{ success: true, message: 'Related product removed successfully', data: { id, name, slug, relatedProductIds: [...] } }`
 
+## Cart (Phase 7)
+
+### POST /api/v1/cart/items
+- Auth: Yes
+- Role: CUSTOMER
+- Description: Adds an item to the cart. Creates cart if first item, validates stock.
+- Request: `{ productId: string, quantity: number }`
+- Response: `{ success: true, message: 'Item added to cart successfully', data: { id, userId, items: [{ productId, quantity, product: { name, price, images, stock, isActive, slug } }], totalAmount, totalItems } }`
+
+### GET /api/v1/cart
+- Auth: Yes
+- Role: CUSTOMER
+- Description: Returns the current user's cart with live product prices and computed totals.
+- Response: `{ success: true, message: 'Cart retrieved successfully', data: { id, userId, items: [{ productId, quantity, product: {...} }], totalAmount, totalItems } }`
+
+### PATCH /api/v1/cart/items/:productId
+- Auth: Yes
+- Role: CUSTOMER
+- Description: Updates the quantity of a specific item in the cart. Validates stock.
+- Request: `{ quantity: number }`
+- Response: `{ success: true, message: 'Cart item updated successfully', data: { id, userId, items: [...], totalAmount, totalItems } }`
+
+### DELETE /api/v1/cart/items
+- Auth: Yes
+- Role: CUSTOMER
+- Description: Removes one or more items from the cart by product IDs.
+- Request: `{ productIds: string[] }`
+- Response: `{ success: true, message: 'Item removed from cart successfully', data: { id, userId, items: [...], totalAmount, totalItems } }`
+

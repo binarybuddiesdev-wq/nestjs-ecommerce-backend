@@ -358,38 +358,46 @@ Sellers can only manage their own products.
 
 ---
 
-## Phase 7 — Cart 🔴
+## Phase 7 — Cart 🟢
 
 ### Goal
 Cart management for Customers. Price calculation with stock validation.
 
-### Tasks
-- Cart schema — id, userId, items[]
-- CartItem embedded — productId, quantity, priceSnapshot
-- POST /api/v1/cart/items — add item to cart, validate stock
-- GET /api/v1/cart — get own cart with current totals
-- PATCH /api/v1/cart/items/:productId — update quantity
-- DELETE /api/v1/cart/items/:productId — remove item
-- DELETE /api/v1/cart — clear entire cart
-- Stock validation on add and update
-- Price snapshot stored at time of adding
-- Cart total calculated on read
-- One cart per user — upsert pattern
-- Full Swagger docs
+### Tasks (4 API Endpoints)
+
+- Cart schema — embedded items[] with productId, quantity
+- CartItem type — productId, quantity, product (runtime resolved)
+- POST /api/v1/cart/items — add item to cart, creates cart if first item, validates stock ✅
+- GET /api/v1/cart — get own cart with live prices and computed totals ✅
+- PATCH /api/v1/cart/items/:productId — update item quantity, validates stock ✅
+- DELETE /api/v1/cart/items — remove one or more items by productIds ✅
+- Stock validation on add and update ✅
+- Price and product info resolved on read — always live ✅
+- Cart total calculated on read ✅
+- One cart per user — lookup by userId ✅
+- Full Swagger docs on all endpoints ✅
+- 189 unit tests passing across 29 test files ✅
 
 ### Test Tasks
-- Add item to cart creates cart if not exists
-- Add same item again increases quantity
-- Stock validation rejects over-limit quantity
-- Price snapshot captured correctly
-- Cart total calculated correctly
-- Remove item works correctly
-- Clear cart empties all items
+- CartController delegates correctly to CartService (5 unit tests)
+- CartService addItem — creates cart if not exists, increments quantity on repeated add
+- CartService addItem — rejects overselling (stock < requested)
+- CartService getCart — returns cart with computed totals
+- CartService getCart — returns empty cart shape when no cart exists
+- CartService getCart — throws ProductNotFoundException for inactive/deleted products
+- CartService removeItems — removes items and recalculates totals
+- CartService removeItems — throws CartNotFoundException when cart empty
+- CartService updateCartItem — updates quantity and recalculates totals
+- CartService updateCartItem — validates stock on update
+- CartService updateCartItem — throws ProductNotFoundException for missing items
+- Cart enums and types exported correctly
+- DTOs validate correctly (empty productId, zero quantity, missing fields)
+- All success/error messages match api.constants.ts constants
 
 ### Verification
-- [ ] pnpm exec tsc --noEmit
-- [ ] pnpm run build
-- [ ] pnpm run test
+- [x] pnpm exec tsc --noEmit
+- [x] pnpm run build
+- [x] pnpm run test — 189 passed
 - [ ] pnpm run test:coverage
 - [ ] pnpm run test:e2e
 - [ ] Cart flow tested end to end in Postman
@@ -647,8 +655,8 @@ Clean codebase ready for resume and interviews.
 | 4 | Users & Seller Onboarding | 🟢 |
 | 5 | Categories | 🟢 |
 | 6 | Products | 🟢 |
-| 7 | Cart | 🟡 |
-| 8 | Orders & State Machine | 🔴 |
+| 7 | Cart | 🟢 |
+| 8 | Orders & State Machine | 🟡 |
 | 9 | Payments | 🔴 |
 | 10 | Reviews & Coupons | 🔴 |
 | 11 | Queues, Caching & Performance | 🔴 |
