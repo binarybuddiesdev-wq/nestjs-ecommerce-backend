@@ -404,7 +404,7 @@ Cart management for Customers. Price calculation with stock validation.
 
 ---
 
-## Phase 8 — Orders & State Machine 🔴
+## Phase 8 — Orders & State Machine 🟡
 
 ### Goal
 Order placement from cart. Inventory reservation. Order state machine with valid
